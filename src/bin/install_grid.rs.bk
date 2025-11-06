@@ -1,0 +1,14 @@
+use install_grid::host::{AppStoreService, PluginHostBuilder};
+use install_grid::plugins::{LegacyPluginAdapter, NativeMockPlugin};
+use install_grid::ui;
+
+fn main() {
+    let host = PluginHostBuilder::new()
+        .with_backend(LegacyPluginAdapter::new("flatpak"))
+        .with_backend(NativeMockPlugin::new("native::mock").with_delay(std::time::Duration::from_millis(120)))
+        .build()
+        .expect("failed to initialise plugin host");
+
+    let service = AppStoreService::new(host);
+    let _exit = ui::run(service);
+}

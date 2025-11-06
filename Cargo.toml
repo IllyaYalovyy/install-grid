@@ -1,0 +1,39 @@
+[package]
+name = "install_grid"
+version = "0.1.0"
+edition = "2021"
+publish = false
+build = "build.rs"
+
+[lib]
+name = "install_grid"
+path = "src/lib.rs"
+
+[[bin]]
+name = "install_grid"
+path = "src/bin/install_grid.rs"
+
+[features]
+legacy-ffi = []
+
+[dependencies]
+anyhow = "1.0"
+async-channel = "1.9"
+async-trait = "0.1"
+futures = "0.3"
+gio = { version = "0.18", features = ["v2_74"] }
+glib = { version = "0.18", features = ["v2_74"] }
+gtk4 = { version = "0.7", package = "gtk4", features = ["v4_10"] }
+libadwaita = { version = "0.5", package = "libadwaita", features = ["v1_4"] }
+once_cell = "1.19"
+parking_lot = "0.12"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+tokio = { version = "1.37", features = ["rt-multi-thread", "sync", "time", "macros"] }
+
+[dev-dependencies]
+tokio = { version = "1.37", features = ["rt-multi-thread", "macros"] }
+
+[build-dependencies]
+pkg-config = "0.3"

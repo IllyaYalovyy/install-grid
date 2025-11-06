@@ -1,0 +1,12 @@
+fn main() {
+    if std::env::var_os("CARGO_FEATURE_LEGACY_FFI").is_some() {
+        if let Err(err) = pkg_config::Config::new()
+            .atleast_version("46")
+            .probe("gnome-software")
+        {
+            panic!(
+                "Failed to locate gnome-software development files via pkg-config: {err}"
+            );
+        }
+    }
+}
